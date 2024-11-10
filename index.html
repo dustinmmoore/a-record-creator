@@ -1,0 +1,147 @@
+<!-- Created by Dustin Moore | https://www.dustinmoore.dev | https://www.github.com/dustinmmoore | Collaborated with Mike Moore | https://www.linkedin.com/in/mike-e-moore/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Record Creator</title>
+  <meta name="description" content="A simple web application for creating DNS A records with hostname, IP address, and TTL.">
+  <meta name="keywords" content="DNS, A Record, IP Address, TTL, Hostname, Web Tool">
+  <meta name="author" content="Dustin Moore">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #343a40;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 1rem;
+      text-align: left;
+    }
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      button {
+        font-size: 0.9rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>A Record Creator</h1>
+    <label for="hostname">Hostname:</label>
+    <input type="text" id="hostname" placeholder="e.g., example.com">
+
+    <label for="ipAddress">IP Address:</label>
+    <input type="text" id="ipAddress" placeholder="e.g., 192.168.1.1" pattern="^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$" title="Please enter a valid IP address">
+
+    <label for="ttl">TTL (Default: 3600 seconds):</label>
+    <input type="text" id="ttl" placeholder="3600" value="3600">
+
+    <button onclick="addRecord()">Add A Record</button>
+
+    <h2>A Records</h2>
+    <table id="recordsTable">
+      <thead>
+        <tr>
+          <th>Hostname</th>
+          <th>IP Address</th>
+          <th>TTL</th>
+        </tr>
+      </thead>
+      <tbody id="recordsBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    function addRecord() {
+      const hostname = document.getElementById('hostname').value.trim();
+      const ipAddress = document.getElementById('ipAddress').value.trim();
+      const ttl = document.getElementById('ttl').value.trim();
+
+      const ipPattern = /^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
+
+      if (!hostname || !ipAddress || !ttl) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      if (!ipPattern.test(ipAddress)) {
+        alert('Please enter a valid IP address.');
+        return;
+      }
+
+      const recordsBody = document.getElementById('recordsBody');
+      const newRow = recordsBody.insertRow();
+
+      newRow.insertCell(0).textContent = hostname;
+      newRow.insertCell(1).textContent = ipAddress;
+      newRow.insertCell(2).textContent = ttl;
+
+      // Clear input fields
+      document.getElementById('hostname').value = '';
+      document.getElementById('ipAddress').value = '';
+      document.getElementById('ttl').value = '3600';
+    }
+  </script>
+</body>
+</html>
+
+<!-- This app is useful for a networking engineer as it allows them to quickly create DNS A records, which are essential for mapping domain names to IP addresses. A records are a fundamental part of DNS management, and this tool provides an easy way to input the hostname, IP address, and TTL (time-to-live) values, helping engineers efficiently manage and troubleshoot DNS configurations. By using this app, networking engineers can visualize and manage DNS entries without needing direct access to more complex DNS management systems, simplifying the process of record creation and verification. -->
