@@ -2,57 +2,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A simple web application for creating DNS A records with hostname, IP address, and TTL.">
-  <meta name="keywords" content="DNS, A Record, IP Address, TTL, Hostname, Web Tool">
-  <meta name="author" content="Dustin Moore, Mike Moore">
-  <meta name="creator" content="Dustin Moore | https://www.dustinmoore.dev">
-  <meta name="collaborator" content="Mike Moore | https://www.linkedin.com/in/mike-e-moore/">
-  <meta name="repository" content="https://www.github.com/dustinmmoore">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" href="./assets/favicon.png">
-  <link rel="apple-touch-icon" href="./assets/icon-192.png">
-  <meta name="theme-color" content="#2c3e50">
-  <title>A Record Creator</title>
-  <link rel="stylesheet" href="./assets/styles.css">
-  <script defer src="./assets/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DNS A Record Creator Tool by Dustin Moore - Full Stack Developer specializing in JavaScript, React, and Node.js. Portfolio: https://www.dustinmoore.dev">
+    <meta name="keywords" content="DNS tools, A Record Creator, Dustin Moore, Web Developer, JavaScript Developer, Full Stack Engineer">
+    <meta name="author" content="Dustin Moore">
+    <title>A Record Creator | Dustin Moore - Full Stack Developer</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">A Record Creator</h1>
-    <div id="errorBoundary" class="error-message" role="alert" aria-live="polite"></div>
-    <div class="form-group" role="form" aria-label="DNS Record Form">
-      <label for="hostname">Hostname:</label>
-      <input type="text" id="hostname" class="input-field" placeholder="e.g., example.com">
+    <header>
+        <h1>A Record Creator</h1>
+        <p>Developed by <a href="https://www.linkedin.com/in/dustinmmoore" target="_blank">Dustin Moore</a></p>
+    </header>
 
-      <label for="ipAddress">IP Address:</label>
-      <input type="text" id="ipAddress" class="input-field" placeholder="e.g., 192.168.1.1" pattern="^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$" title="Please enter a valid IP address">
+    <main>
+        <form id="recordForm">
+            <div class="form-group">
+                <label for="hostname">Hostname:</label>
+                <input type="text" id="hostname" required>
+            </div>
+            <div class="form-group">
+                <label for="ipAddress">IP Address:</label>
+                <input type="text" id="ipAddress" required>
+            </div>
+            <div class="form-group">
+                <label for="ttl">TTL (seconds):</label>
+                <input type="number" id="ttl" value="3600" required>
+            </div>
+            <button type="submit">Add A Record</button>
+        </form>
 
-      <label for="ttl">TTL (Default: 3600 seconds):</label>
-      <input type="text" id="ttl" class="input-field" placeholder="3600" value="3600">
+        <table id="recordsTable">
+            <thead>
+                <tr>
+                    <th>Hostname</th>
+                    <th>IP Address</th>
+                    <th>TTL</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
 
-      <button class="btn-primary" onclick="addRecord()" id="submitButton" aria-label="Add DNS Record">
-        <span class="button-text">Add A Record</span>
-        <span class="loading-spinner" hidden></span>
-      </button>
-    </div>
+    <footer>
+        <p>Created by Dustin Moore | <a href="https://github.com/dustinmoorenet" target="_blank">GitHub</a> | <a href="https://www.dustinmoore.dev" target="_blank">Portfolio</a></p>
+    </footer>
 
-    <h2 class="subtitle">A Records</h2>
-    <div class="table-container">
-      <table id="recordsTable" class="records-table">
-        <thead>
-          <tr>
-            <th>Hostname</th>
-            <th>IP Address</th>
-            <th>TTL</th>
-          </tr>
-        </thead>
-        <tbody id="recordsBody"></tbody>
-      </table>
-    </div>
-    <div id="loadingState" class="loading-state" hidden>Loading records...</div>
-  </div>
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
 

@@ -1,5 +1,17 @@
 # A Record Creator
 
+A professional DNS A Record management tool developed by Dustin Moore, a Full Stack Developer specializing in JavaScript, React, and Node.js.
+
+## About the Developer
+
+I'm Dustin Moore, a Full Stack Developer with expertise in:
+- Frontend: React, JavaScript (ES6+), HTML5, CSS3
+- Backend: Node.js, Express, REST APIs
+- Database: MongoDB, PostgreSQL
+- Tools: Git, Docker, AWS
+
+[LinkedIn](https://www.linkedin.com/in/dustinmmoore) | [GitHub](https://github.com/dustinmoorenet)
+
 ## Overview
 A Record Creator is a simple web application that allows users to create DNS A records by specifying a hostname, IP address, and TTL (time-to-live) value. This tool is particularly useful for networking engineers, system administrators, and IT professionals who need to quickly create and manage DNS A records, which are essential for mapping domain names to IP addresses.
 
@@ -44,6 +56,15 @@ A Record Creator is a simple web application that allows users to create DNS A r
 - **Export Functionality**: Allow users to export the A records as a CSV file for easy use in other systems.
 - **Advanced Validation**: Enhance IP address validation to include IPv6 support.
 
+## Technical Implementation
+
+This project demonstrates:
+- Modern JavaScript (ES6+) with Class-based architecture
+- Responsive design using CSS Grid and Flexbox
+- Local Storage for data persistence
+- Form validation and error handling
+- Clean, maintainable code structure
+
 ## Contributing
 Contributions are welcome! If you would like to contribute, please follow these steps:
 1. Fork the repository.
@@ -56,5 +77,11 @@ Contributions are welcome! If you would like to contribute, please follow these 
 This project is open source and available under the [MIT License](LICENSE).
 
 ## Contact
-If you have any questions, feel free to reach out to [Dustin Moore](https://www.linkedin/in/dustinmmoore).
+
+Looking for a skilled Full Stack Developer? Contact me:
+- Email: dustinmmoore@icloud.com
+- LinkedIn: https://www.linkedin.com/in/dustinmmoore
+- Portfolio: https://www.dustinmoore.dev
+
+If you have any questions, feel free to reach out to [Dustin Moore](https://www.linkedin.com/in/dustinmmoore).
 
