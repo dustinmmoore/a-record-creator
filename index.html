@@ -3,21 +3,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="DNS A Record Creator Tool by Dustin Moore - Full Stack Developer specializing in JavaScript, React, and Node.js. Portfolio: https://www.dustinmoore.dev">
     <meta name="keywords" content="DNS tools, A Record Creator, Dustin Moore, Web Developer, JavaScript Developer, Full Stack Engineer">
     <meta name="author" content="Dustin Moore">
     <title>A Record Creator | Dustin Moore - Full Stack Developer</title>
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#2c3e50">
 </head>
 <body>
     <header>
-        <h1>A Record Creator</h1>
-        <p>Developed by <a href="https://www.linkedin.com/in/dustinmmoore" target="_blank">Dustin Moore</a></p>
+        <h1>DNS A Record Creator</h1>
+        <p>Simplify your DNS management</p>
     </header>
 
     <main>
+        <div class="actions">
+            <button id="exportCSV" class="btn-secondary">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Export CSV
+            </button>
+            <button id="exportJSON" class="btn-secondary">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Export JSON
+            </button>
+        </div>
         <form id="recordForm">
             <div class="form-group">
                 <label for="hostname">Hostname:</label>
@@ -34,23 +50,37 @@
             <button type="submit">Add A Record</button>
         </form>
 
-        <table id="recordsTable">
-            <thead>
-                <tr>
-                    <th>Hostname</th>
-                    <th>IP Address</th>
-                    <th>TTL</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="table-container">
+            <table id="recordsTable">
+                <thead>
+                    <tr>
+                        <th>Hostname</th>
+                        <th>IP Address</th>
+                        <th>TTL</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="errorBoundary" class="error-message" hidden></div>
+        <div id="successMessage" class="success-message" hidden></div>
     </main>
 
     <footer>
-        <p>Created by Dustin Moore | <a href="https://github.com/dustinmoorenet" target="_blank">GitHub</a> | <a href="https://www.dustinmoore.dev" target="_blank">Portfolio</a></p>
+        <p>Created with ❤️ by Dustin Moore</p>
+        <div class="footer-links">
+            <button class="footer-button" onclick="window.open('https://www.linkedin.com/in/dustinmmoore', '_blank')">LinkedIn</button>
+            <button class="footer-button" onclick="window.open('https://github.com/dustinmmoore', '_blank')">GitHub</button>
+            <button class="footer-button" onclick="window.open('https://www.dustinmoore.dev', '_blank')">Portfolio</button>
+        </div>
     </footer>
 
     <script src="./assets/js/main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js');
+        }
+    </script>
 </body>
 </html>
 

@@ -1,12 +1,14 @@
-
 {
     "name": "A Record Creator",
     "short_name": "DNS Records",
-    "description": "Create and manage DNS A records",
+    "description": "Professional DNS A Record Management Tool",
+    "version": "1.0.0",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#f5f6fa",
     "theme_color": "#2c3e50",
+    "orientation": "any",
+    "categories": ["utilities", "productivity"],
     "icons": [
         {
             "src": "./assets/icon-192.png",
@@ -17,6 +19,21 @@
             "src": "./assets/icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Add New Record",
+            "url": "/index.html?action=new",
+            "description": "Create a new DNS A record"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "./assets/screenshots/desktop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
         }
     ]
 }
