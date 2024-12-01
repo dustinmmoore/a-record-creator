@@ -89,6 +89,15 @@ main {
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
+.form-group select {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    transition: var(--transition);
+}
+
 /* Button Styles */
 .actions {
     display: flex;
@@ -164,8 +173,30 @@ button {
     border-bottom: 1px solid var(--border-color);
 }
 
+#recordsTable td:nth-child(5) {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
 #recordsTable tr:hover {
     background-color: var(--table-hover);
+}
+
+/* Highlighting for different record types */
+#recordsTable tr[data-type="A"] {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+#recordsTable tr[data-type="CNAME"] {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+/* Network-specific styling */
+.subnet-info {
+    font-family: monospace;
+    background: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 2px;
 }
 
 /* Notification Messages */

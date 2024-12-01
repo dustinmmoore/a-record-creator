@@ -33,19 +33,36 @@
                 </svg>
                 Export JSON
             </button>
+            <button id="importRecords" class="btn-secondary">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                Import Records
+            </button>
         </div>
         <form id="recordForm">
             <div class="form-group">
+                <label for="recordType">Record Type:</label>
+                <select id="recordType" required>
+                    <option value="A">A Record</option>
+                    <option value="CNAME">CNAME Record</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="hostname">Hostname:</label>
-                <input type="text" id="hostname" required>
+                <input type="text" id="hostname" required placeholder="subdomain.example.com">
             </div>
             <div class="form-group">
                 <label for="ipAddress">IP Address:</label>
-                <input type="text" id="ipAddress" required>
+                <input type="text" id="ipAddress" required placeholder="192.168.1.1">
             </div>
             <div class="form-group">
                 <label for="ttl">TTL (seconds):</label>
                 <input type="number" id="ttl" value="3600" required>
+            </div>
+            <div class="form-group">
+                <label for="subnet">Subnet (optional):</label>
+                <input type="text" id="subnet" placeholder="255.255.255.0">
             </div>
             <button type="submit">Add A Record</button>
         </form>
@@ -54,9 +71,11 @@
             <table id="recordsTable">
                 <thead>
                     <tr>
+                        <th>Type</th>
                         <th>Hostname</th>
-                        <th>IP Address</th>
+                        <th>IP Address/Target</th>
                         <th>TTL</th>
+                        <th>PTR Record</th>
                     </tr>
                 </thead>
                 <tbody></tbody>

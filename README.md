@@ -20,9 +20,35 @@ A Record Creator is a simple web application designed to help networking enginee
 ## Features
 
 - **Input hostname, IP address, and TTL**: Specify hostname, IP address, and optionally modify the TTL value (default is 3600 seconds).
-- **Validation**: Validate the IP address format to ensure correctness.
-- **Export Data**: Export created A records in both CSV and JSON formats.
-- **User-Friendly Interface**: Responsive design that works well on both desktop and mobile devices.
+- **CNAME Record Support**: Create and manage CNAME records alongside A records.
+- **Subnet Management**: Optional subnet field for better network organization.
+- **PTR Record Generation**: Automatic generation of reverse DNS (PTR) records for A records.
+- **Validation**: Advanced validation for IP addresses, hostnames, and subnet masks.
+- **Bulk Operations**: Import and export records in both CSV and JSON formats.
+- **User-Friendly Interface**: Responsive design with helpful placeholders and clear record type distinctions.
+
+## Network Engineering Features
+
+### Subnet Support
+- Input and validate subnet masks (e.g., 255.255.255.0)
+- Support for Class A, B, and C subnet patterns
+- Visual subnet information display
+
+### DNS Record Types
+- **A Records**: Forward DNS mapping of hostnames to IPv4 addresses
+- **CNAME Records**: Canonical name records for domain aliases
+- **PTR Records**: Automatic reverse DNS record generation
+
+### Data Validation
+- IP address format verification
+- Hostname pattern validation
+- Subnet mask pattern checking
+- CNAME target validation
+
+### Record Management
+- Color-coded record types for easy identification
+- Monospace formatting for technical fields
+- Bulk import/export capabilities
 
 ## Usage
 
@@ -62,10 +88,10 @@ A Record Creator is a simple web application designed to help networking enginee
 
 This project demonstrates:
 
-- **Modern JavaScript (ES6+)**: Utilizing class-based architecture to manage DNS records.
-- **Responsive Design**: Leveraging CSS Grid and Flexbox for adaptable layouts.
-- **Data Export**: CSV and JSON file generation for exporting DNS records.
-- **Form Validation and Error Handling**: Ensuring inputs are correct and notifying users about any issues.
+- **Modern JavaScript (ES6+)**: Class-based architecture with robust DNS record management
+- **Advanced Validation**: Comprehensive input validation for networking requirements
+- **Data Processing**: PTR record generation and subnet validation
+- **User Experience**: Helpful placeholders and instant feedback
 
 ## Contributing
 
