@@ -1,3 +1,8 @@
+/**
+ * Created by Dustin Moore | https://www.dustinmoore.dev | https://www.github.com/dustinmmoore | https://www.linkedin.com/in/dustinmmoore
+ * Collaborated with Mike Moore | https://www.linkedin.com/in/mike-e-moore/
+ */
+
 class DNSRecordManager {
     constructor() {
         this.form = document.getElementById('recordForm');
