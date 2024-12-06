@@ -2,15 +2,6 @@
 
 A professional DNS A Record management tool developed by Dustin Moore, a Full Stack Developer specializing in JavaScript, React, and Node.js.
 
-## About the Developer
-
-I'm Dustin Moore, a Full Stack Developer with expertise in:
-
-- **Frontend**: React, JavaScript (ES6+), HTML5, CSS3
-- **Backend**: Node.js, Express, REST APIs
-- **Database**: MongoDB, PostgreSQL
-- **Tools**: Git, Docker, AWS
-
 [LinkedIn](https://www.linkedin.com/in/dustinmmoore) | [GitHub](https://github.com/dustinmmoore)
 
 ## Overview
