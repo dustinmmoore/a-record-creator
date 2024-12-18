@@ -196,11 +196,11 @@ class DNSRecordManager {
             return;
         }
 
-        const headers = ['Hostname', 'IP Address', 'TTL'];
+        const headers = ['Type', 'Hostname', 'Target', 'TTL'];
         const csvContent = [
             headers.join(','),
             ...this.records.map(record => 
-                [record.hostname, record.ipAddress, record.ttl].join(',')
+                [record.type, record.hostname, record.target, record.ttl].join(',')
             )
         ].join('\n');
 
