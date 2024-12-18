@@ -85,13 +85,15 @@ class DNSRecordManager {
     }
 
     validateCNAME(alias, canonical) {
-        const hostnamePattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
+        // Updated pattern to handle more valid domain formats
+        const hostnamePattern = /^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+        
         if (!alias || !canonical) {
             this.showError('Please fill in all CNAME fields');
             return false;
         }
         if (!hostnamePattern.test(canonical) || !hostnamePattern.test(alias)) {
-            this.showError('Invalid alias or canonical name format');
+            this.showError('Invalid domain format. Example: subdomain.example.com');
             return false;
         }
         return true;
