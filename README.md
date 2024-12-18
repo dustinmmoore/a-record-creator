@@ -11,33 +11,31 @@ A Record Creator is a simple web application designed to help networking enginee
 ## Features
 
 - **Input hostname, IP address, and TTL**: Specify hostname, IP address, and optionally modify the TTL value (default is 3600 seconds).
-- **CNAME Record Support**: Create and manage CNAME records alongside A records.
-- **Subnet Management**: Optional subnet field for better network organization.
+- **CNAME Record Support**: Create and manage CNAME records with alias and canonical name fields for domain aliasing.
 - **PTR Record Generation**: Automatic generation of reverse DNS (PTR) records for A records.
-- **Validation**: Advanced validation for IP addresses, hostnames, and subnet masks.
+- **Validation**: Advanced validation for IP addresses, hostnames, and DNS records.
 - **Bulk Operations**: Import and export records in both CSV and JSON formats.
 - **User-Friendly Interface**: Responsive design with helpful placeholders and clear record type distinctions.
 
 ## Network Engineering Features
 
-### Subnet Support
-- Input and validate subnet masks (e.g., 255.255.255.0)
-- Support for Class A, B, and C subnet patterns
-- Visual subnet information display
-
 ### DNS Record Types
 - **A Records**: Forward DNS mapping of hostnames to IPv4 addresses
-- **CNAME Records**: Canonical name records for domain aliases
+- **CNAME Records**: 
+  - Alias field for specifying the domain alias
+  - Canonical name field for target domain
+  - Automatic validation of both alias and canonical formats
 - **PTR Records**: Automatic reverse DNS record generation
 
 ### Data Validation
-- IP address format verification
+- IP address format verification for A records
 - Hostname pattern validation
-- Subnet mask pattern checking
-- CNAME target validation
+- CNAME alias and canonical name validation
+- TTL value verification
 
 ### Record Management
 - Color-coded record types for easy identification
+- Dynamic form fields based on record type
 - Monospace formatting for technical fields
 - Bulk import/export capabilities
 
@@ -48,11 +46,13 @@ A Record Creator is a simple web application designed to help networking enginee
    git clone https://github.com/dustinmmoore/a-record-creator.git
    ```
 2. **Open the application**: Open the `index.html` file in your preferred web browser.
-3. **Input details**: Fill in the fields for hostname, IP address, and TTL.
-   - The IP address field validates the input to ensure it is in the correct format.
-   - The TTL field is pre-filled with a default value of `3600`.
-4. **Add the A record**: Click the "Add A Record" button to add the record to the table below.
-5. **View and Export Records**: The newly added A record will be displayed in the table, and you can export all records in CSV or JSON format.
+3. **Select record type**: Choose between A Record or CNAME Record.
+4. **Input details**: 
+   - For A Records: Fill in hostname, IP address, and TTL
+   - For CNAME Records: Fill in hostname, alias, canonical name, and TTL
+   - The TTL field is pre-filled with a default value of `3600`
+5. **Add the record**: Click "Add Record" to add it to the table below.
+6. **View and Export Records**: View all records in the table and export in CSV or JSON format.
 
 ## Screenshot
 
