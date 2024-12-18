@@ -47,13 +47,36 @@ class DNSRecordManager {
     }
 
     addRecord() {
-        const hostname = document.getElementById('hostname').value.trim();
-        const ipAddress = document.getElementById('ipAddress').value.trim();
-        const ttl = document.getElementById('ttl').value.trim();
+        const recordType = this.recordTypeSelect.value;
+        
+        if (recordType === 'A') {
+            const hostname = document.getElementById('hostname').value.trim();
+            const ipAddress = document.getElementById('ipAddress').value.trim();
+            const ttl = document.getElementById('ttl').value.trim();
 
-        if (!this.validateInputs(hostname, ipAddress, ttl)) return;
+            if (!this.validateInputs(hostname, ipAddress, ttl)) return;
 
-        this.records.push({ hostname, ipAddress, ttl });
+            this.records.push({
+                type: 'A',
+                hostname,
+                target: ipAddress,
+                ttl
+            });
+        } else if (recordType === 'CNAME') {
+            const alias = document.getElementById('alias').value.trim();
+            const canonical = document.getElementById('canonical').value.trim();
+            const ttl = document.getElementById('ttl').value.trim();
+
+            if (!this.validateCNAME(alias, canonical)) return;
+
+            this.records.push({
+                type: 'CNAME',
+                hostname: alias,
+                target: canonical,
+                ttl
+            });
+        }
+
         this.updateTable();
         this.clearForm();
     }
@@ -148,26 +171,23 @@ class DNSRecordManager {
 
     updateTable() {
         const tbody = document.querySelector('#recordsTable tbody');
-        const row = tbody.insertRow();
         const record = this.records[this.records.length - 1];
-        
-        // Add Type column
-        const typeCell = row.insertCell();
-        typeCell.textContent = record.type || 'A';
+        const row = tbody.insertRow();
+        row.setAttribute('data-type', record.type);
 
-        // Add other columns
-        Object.values(record).forEach(value => {
+        // Add cells
+        const cells = [
+            record.type,
+            record.hostname,
+            record.target,
+            record.ttl,
+            record.type === 'A' ? this.generatePTRRecord(record.target) : 'N/A'
+        ];
+
+        cells.forEach(content => {
             const cell = row.insertCell();
-            cell.textContent = value;
+            cell.textContent = content;
         });
-
-        // Add PTR record if it's an A record
-        const ptrCell = row.insertCell();
-        if (record.type === 'A') {
-            ptrCell.textContent = this.generatePTRRecord(record.ipAddress);
-        } else {
-            ptrCell.textContent = 'N/A';
-        }
     }
 
     exportToCSV() {
