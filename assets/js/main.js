@@ -11,12 +11,10 @@ class DNSRecordManager {
         this.records = [];
         this.importRecords = document.getElementById('importRecords');
         
-        // Add subnet validation patterns
-        this.subnetPatterns = {
-            'class-a': /^(255\.0\.0\.0|255\.[0-9]+\.0\.0)$/,
-            'class-b': /^(255\.255\.0\.0|255\.255\.[0-9]+\.0)$/,
-            'class-c': /^(255\.255\.255\.0|255\.255\.255\.[0-9]+)$/
-        };
+        this.recordTypeSelect = document.getElementById('recordType');
+        this.ipAddressGroup = document.getElementById('ipAddressGroup');
+        this.aliasGroup = document.getElementById('aliasGroup');
+        this.canonicalGroup = document.getElementById('canonicalGroup');
 
         this.initializeEventListeners();
     }
@@ -30,6 +28,14 @@ class DNSRecordManager {
         this.exportCSV.addEventListener('click', () => this.exportToCSV());
         this.exportJSON.addEventListener('click', () => this.exportToJSON());
         this.importRecords.addEventListener('click', () => this.handleBulkImport());
+        this.recordTypeSelect.addEventListener('change', () => this.toggleRecordTypeFields());
+    }
+
+    toggleRecordTypeFields() {
+        const isCNAME = this.recordTypeSelect.value === 'CNAME';
+        this.ipAddressGroup.style.display = isCNAME ? 'none' : 'block';
+        this.aliasGroup.style.display = isCNAME ? 'block' : 'none';
+        this.canonicalGroup.style.display = isCNAME ? 'block' : 'none';
     }
 
     addRecord() {
@@ -45,11 +51,12 @@ class DNSRecordManager {
     }
 
     validateInputs(hostname, ipAddress, ttl) {
-        const recordType = document.getElementById('recordType').value;
-        const subnet = document.getElementById('subnet').value;
+        const recordType = this.recordTypeSelect.value;
 
         if (recordType === 'CNAME') {
-            return this.validateCNAME(hostname, ipAddress);
+            const alias = document.getElementById('alias').value.trim();
+            const canonical = document.getElementById('canonical').value.trim();
+            return this.validateCNAME(hostname, alias, canonical);
         }
 
         const ipPattern = /^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
@@ -66,21 +73,17 @@ class DNSRecordManager {
             this.showError('Please enter a valid TTL value');
             return false;
         }
-        if (subnet && !this.validateSubnet(subnet)) {
-            this.showError('Invalid subnet mask');
-            return false;
-        }
         return true;
     }
 
-    validateSubnet(subnet) {
-        return Object.values(this.subnetPatterns).some(pattern => pattern.test(subnet));
-    }
-
-    validateCNAME(hostname, target) {
+    validateCNAME(hostname, alias, canonical) {
         const hostnamePattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
-        if (!hostnamePattern.test(target)) {
-            this.showError('Invalid CNAME target');
+        if (!alias || !canonical) {
+            this.showError('Please fill in all CNAME fields');
+            return false;
+        }
+        if (!hostnamePattern.test(canonical)) {
+            this.showError('Invalid canonical name');
             return false;
         }
         return true;
