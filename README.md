@@ -10,12 +10,14 @@ A Record Creator is a simple web application designed to help networking enginee
 
 ## Features
 
-- **Input hostname, IP address, and TTL**: Specify hostname, IP address, and optionally modify the TTL value (default is 3600 seconds).
-- **CNAME Record Support**: Create and manage CNAME records with alias and canonical name fields for domain aliasing.
-- **PTR Record Generation**: Automatic generation of reverse DNS (PTR) records for A records.
-- **Validation**: Advanced validation for IP addresses, hostnames, and DNS records.
-- **Bulk Operations**: Import and export records in both CSV and JSON formats.
-- **User-Friendly Interface**: Responsive design with helpful placeholders and clear record type distinctions.
+- **Dual Record Type Support**: Create both A records and CNAME records from a single interface
+- **A Records**: Create standard DNS A records with hostname, IP address, and TTL
+- **CNAME Records**: Create CNAME records with alias and canonical name fields
+- **Dynamic Form**: Form fields automatically update based on selected record type
+- **Input Validation**: Comprehensive validation for both A and CNAME records
+- **PTR Record Generation**: Automatic generation of reverse DNS (PTR) records for A records
+- **Bulk Operations**: Import and export records in both CSV and JSON formats
+- **User-Friendly Interface**: Clean, responsive design with helpful field descriptions
 
 ## Network Engineering Features
 
@@ -45,14 +47,19 @@ A Record Creator is a simple web application designed to help networking enginee
    ```sh
    git clone https://github.com/dustinmmoore/a-record-creator.git
    ```
-2. **Open the application**: Open the `index.html` file in your preferred web browser.
-3. **Select record type**: Choose between A Record or CNAME Record.
-4. **Input details**: 
-   - For A Records: Fill in hostname, IP address, and TTL
-   - For CNAME Records: Fill in hostname, alias, canonical name, and TTL
-   - The TTL field is pre-filled with a default value of `3600`
-5. **Add the record**: Click "Add Record" to add it to the table below.
-6. **View and Export Records**: View all records in the table and export in CSV or JSON format.
+2. **Open the application**: Open the `index.html` file in your web browser
+3. **Select record type**: Choose between A Record or CNAME Record
+4. **Input details based on record type**: 
+   - For A Records:
+     - Enter hostname (e.g., subdomain.example.com)
+     - Enter IP address
+     - Set TTL (default 3600)
+   - For CNAME Records:
+     - Enter alias domain
+     - Enter canonical (target) domain
+     - Set TTL (default 3600)
+5. **Add the record**: Click "Add Record" to add it to the table
+6. **View and Export**: Review records in the table and export as needed
 
 ## Screenshot
 

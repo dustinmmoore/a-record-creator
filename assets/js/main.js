@@ -85,15 +85,21 @@ class DNSRecordManager {
     }
 
     validateCNAME(alias, canonical) {
-        // Updated pattern to handle more valid domain formats
-        const hostnamePattern = /^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+        // Simpler pattern that just checks for at least one dot and no spaces
+        const hostnamePattern = /^[^\s]+\.[^\s]+$/;
         
         if (!alias || !canonical) {
             this.showError('Please fill in all CNAME fields');
             return false;
         }
+
+        // Debug logging
+        console.log('Validating:', { alias, canonical });
+        console.log('Alias test:', hostnamePattern.test(alias));
+        console.log('Canonical test:', hostnamePattern.test(canonical));
+
         if (!hostnamePattern.test(canonical) || !hostnamePattern.test(alias)) {
-            this.showError('Invalid domain format. Example: subdomain.example.com');
+            this.showError('Invalid domain format. Domain must contain at least one dot (example: example.com)');
             return false;
         }
         return true;
