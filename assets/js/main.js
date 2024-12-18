@@ -15,6 +15,7 @@ class DNSRecordManager {
         this.ipAddressGroup = document.getElementById('ipAddressGroup');
         this.aliasGroup = document.getElementById('aliasGroup');
         this.canonicalGroup = document.getElementById('canonicalGroup');
+        this.hostnameGroup = document.getElementById('hostnameGroup');
 
         this.initializeEventListeners();
     }
@@ -34,8 +35,15 @@ class DNSRecordManager {
     toggleRecordTypeFields() {
         const isCNAME = this.recordTypeSelect.value === 'CNAME';
         this.ipAddressGroup.style.display = isCNAME ? 'none' : 'block';
+        this.hostnameGroup.style.display = isCNAME ? 'none' : 'block';
         this.aliasGroup.style.display = isCNAME ? 'block' : 'none';
         this.canonicalGroup.style.display = isCNAME ? 'block' : 'none';
+        
+        // Toggle required attribute
+        document.getElementById('hostname').required = !isCNAME;
+        document.getElementById('ipAddress').required = !isCNAME;
+        document.getElementById('alias').required = isCNAME;
+        document.getElementById('canonical').required = isCNAME;
     }
 
     addRecord() {
@@ -56,7 +64,7 @@ class DNSRecordManager {
         if (recordType === 'CNAME') {
             const alias = document.getElementById('alias').value.trim();
             const canonical = document.getElementById('canonical').value.trim();
-            return this.validateCNAME(hostname, alias, canonical);
+            return this.validateCNAME(alias, canonical);
         }
 
         const ipPattern = /^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
@@ -76,14 +84,14 @@ class DNSRecordManager {
         return true;
     }
 
-    validateCNAME(hostname, alias, canonical) {
+    validateCNAME(alias, canonical) {
         const hostnamePattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
         if (!alias || !canonical) {
             this.showError('Please fill in all CNAME fields');
             return false;
         }
-        if (!hostnamePattern.test(canonical)) {
-            this.showError('Invalid canonical name');
+        if (!hostnamePattern.test(canonical) || !hostnamePattern.test(alias)) {
+            this.showError('Invalid alias or canonical name format');
             return false;
         }
         return true;
@@ -209,4 +217,26 @@ class DNSRecordManager {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new DNSRecordManager();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const recordType = document.getElementById('recordType');
+    const hostnameGroup = document.getElementById('hostnameGroup');
+    const ipAddressGroup = document.getElementById('ipAddressGroup');
+    const aliasGroup = document.getElementById('aliasGroup');
+    const canonicalGroup = document.getElementById('canonicalGroup');
+
+    recordType.addEventListener('change', function() {
+        if (this.value === 'A') {
+            hostnameGroup.style.display = 'block';
+            ipAddressGroup.style.display = 'block';
+            aliasGroup.style.display = 'none';
+            canonicalGroup.style.display = 'none';
+        } else if (this.value === 'CNAME') {
+            hostnameGroup.style.display = 'none';
+            ipAddressGroup.style.display = 'none';
+            aliasGroup.style.display = 'block';
+            canonicalGroup.style.display = 'block';
+        }
+    });
 });
