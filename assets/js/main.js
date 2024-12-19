@@ -7,7 +7,6 @@ class DNSRecordManager {
     constructor() {
         this.form = document.getElementById('recordForm');
         this.exportCSV = document.getElementById('exportCSV');
-        this.exportJSON = document.getElementById('exportJSON');
         this.records = [];
         this.importRecords = document.getElementById('importRecords');
         
@@ -27,7 +26,6 @@ class DNSRecordManager {
         });
 
         this.exportCSV.addEventListener('click', () => this.exportToCSV());
-        this.exportJSON.addEventListener('click', () => this.exportToJSON());
         this.importRecords.addEventListener('click', () => this.handleBulkImport());
         this.recordTypeSelect.addEventListener('change', () => this.toggleRecordTypeFields());
     }
@@ -138,17 +136,13 @@ class DNSRecordManager {
     handleBulkImport() {
         const input = document.createElement('input');
         input.type = 'file';
-        input.accept = '.csv,.json';
+        input.accept = '.csv';
         input.onchange = (e) => {
             const file = e.target.files[0];
             const reader = new FileReader();
             reader.onload = (event) => {
                 try {
-                    if (file.name.endsWith('.csv')) {
-                        this.importCSV(event.target.result);
-                    } else {
-                        this.importJSON(event.target.result);
-                    }
+                    this.importCSV(event.target.result);
                 } catch (error) {
                     this.showError('Import failed: Invalid file format');
                 }
@@ -205,16 +199,6 @@ class DNSRecordManager {
         ].join('\n');
 
         this.downloadFile(csvContent, 'dns_records.csv', 'text/csv');
-    }
-
-    exportToJSON() {
-        if (this.records.length === 0) {
-            this.showError('No records to export');
-            return;
-        }
-
-        const jsonContent = JSON.stringify(this.records, null, 2);
-        this.downloadFile(jsonContent, 'dns_records.json', 'application/json');
     }
 
     downloadFile(content, filename, type) {

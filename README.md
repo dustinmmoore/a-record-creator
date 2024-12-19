@@ -1,6 +1,6 @@
 # A Record Creator
 
-A professional DNS A Record management tool developed by Dustin Moore, a Full Stack Developer specializing in JavaScript, React, and NEXT.js.
+A professional DNS A Record management tool developed by Dustin Moore.
 
 [LinkedIn](https://www.linkedin.com/in/dustinmmoore) | [GitHub](https://github.com/dustinmmoore)
 
@@ -16,7 +16,8 @@ A Record Creator is a simple web application designed to help networking enginee
 - **Dynamic Form**: Form fields automatically update based on selected record type
 - **Input Validation**: Comprehensive validation for both A and CNAME records
 - **PTR Record Generation**: Automatic generation of reverse DNS (PTR) records for A records
-- **Bulk Operations**: Import and export records in both CSV and JSON formats
+- **CSV Export**: Export records in CSV format for easy integration with other tools
+- **Record Import**: Import records from CSV files
 - **User-Friendly Interface**: Clean, responsive design with helpful field descriptions
 
 ## Network Engineering Features
@@ -39,7 +40,7 @@ A Record Creator is a simple web application designed to help networking enginee
 - Color-coded record types for easy identification
 - Dynamic form fields based on record type
 - Monospace formatting for technical fields
-- Bulk import/export capabilities
+- CSV import/export capabilities
 
 ## Usage
 
